@@ -1,30 +1,36 @@
 <template>
   <div class="section">
     <div class="container">
-      <h1 class="title">Vue Draggable Simple Demo</h1>
-      <table class="table is-bordered">
-        <thead>
-          <tr>
-            <th>id</th><th>name</th><td>age</td>
-          </tr>
-        </thead>
-        <draggable v-model="items" tag="tbody" @end="handleDragEnd" :options="{animation:500}">
-          <tr class="movable" v-for="item in items" :key="item.id" :data-item-id="item.id">
-            <td>{{ item.id }}</td><td>{{ item.name }}</td><td>{{ item.age }}</td>
-          </tr>
-        </draggable>
-      </table>
-      <h2 class="title">Items</h2>
-      <p><b>this.items:</b> {{ items }}</p>
-      <br />
-      <h2 class="title">Orders</h2>
-      <p><b>this.items.map(x => x.id):</b> {{ orders }}</p>
-      <br />
-      <h2 class="title">From/To</h2>
-      <p>
-        <b>From:</b> {{ from }}<br />
-        <b>To:</b> {{ to }}
-      </p>
+      <div class="columns">
+        <div class="column">
+          <h1 class="title">Vue.Draggable Demo</h1>
+          <table class="table is-bordered">
+            <thead>
+              <tr>
+                <th>id</th><th>name</th><td>age</td>
+              </tr>
+            </thead>
+            <draggable v-model="items" tag="tbody" @end="handleDragEnd" :options="{animation:500}">
+              <tr class="movable" v-for="item in items" :key="item.id" :data-item-id="item.id">
+                <td>{{ item.id }}</td><td>{{ item.name }}</td><td>{{ item.age }}</td>
+              </tr>
+            </draggable>
+          </table>
+        </div>
+        <div class="column">
+          <h2 class="title">this.items</h2>
+          <p>{{ items }}</p>
+          <br />
+          <h2 class="title">this.items.map(x => x.id)</h2>
+          <p>{{ orders }}</p>
+          <br />
+          <h2 class="title">From/To</h2>
+          <p>
+            <b>From:</b> {{ from }}<br />
+            <b>To:</b> {{ to }}
+          </p>
+        </div>
+      </div>
       <br />
 
       <h2 class="title">Script</h2>
