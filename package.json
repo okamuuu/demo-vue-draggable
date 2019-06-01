@@ -1,0 +1,26 @@
+{
+  "name": "demo-vue-draggable",
+  "version": "1.0.0",
+  "description": "My dazzling Nuxt.js project",
+  "author": "okamuuu",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/bulma": "^1.2.1",
+    "@nuxtjs/toast": "^3.2.1",
+    "cross-env": "^5.2.0",
+    "highlight.js": "^9.15.8",
+    "nuxt": "^2.4.0",
+    "vue-code-highlight": "^0.7.1",
+    "vue-highlightjs": "^1.3.3",
+    "vuedraggable": "^2.21.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}
