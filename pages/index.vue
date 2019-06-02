@@ -31,36 +31,6 @@
           </p>
         </div>
       </div>
-      <br />
-
-      <h2 class="title">Script</h2>
-      <pre v-highlightjs><code class="javascript">
-import draggable from "vuedraggable";
-
-export default {
-  components: {
-    draggable,
-  },
-  data() {
-    return {
-      items: [
-        { id: 1, name: "Bianka Effertz", age: 37 },
-        { id: 2, name: "Mckayla Bogan", age: 20 },
-        { id: 3, name: "Estevan Mann", age: 17 },
-        { id: 4, name: "Cloyd Ziemann", age: 55 }
-      ],
-    };
-  },
-  methods: {
-    handleDragEnd(e) {
-      const { from , to } = e
-      this.$toast.show('dragEnd')
-      console.log("dragEnd")
-      // console.log(e)
-    },
-  }
-}
-      </code></pre>
     </div>
   </div>
 </template>
