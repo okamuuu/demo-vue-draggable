@@ -10,7 +10,7 @@
                 <th>id</th><th>name</th><td>age</td>
               </tr>
             </thead>
-            <draggable v-model="items" tag="tbody" @end="handleDragEnd" :options="{animation:500}">
+            <draggable v-model="items" tag="tbody" :move="handleMove" @start="handleDragStart" @end="handleDragEnd" :options="{animation:500}">
               <tr class="movable" v-for="item in items" :key="item.id" :data-item-id="item.id">
                 <td>{{ item.id }}</td><td>{{ item.name }}</td><td>{{ item.age }}</td>
               </tr>
@@ -62,17 +62,42 @@ export default {
   },
 
   methods: {
+    handleDragStart(e) {
+      console.log("handleDragStart")
+      console.log(e.oldIndex)
+    },
     handleDragEnd(e) {
       const { newIndex, oldIndex } = e
       this.$toast.show('dragEnd')
+
+      this.futureItem = this.items[this.futureIndex]
+      this.movingItem = this.items[this.movingIndex]
+      console.log(this.futureItem, this.movingItem)
+      const _items = Object.assign([], this.items)
+      _items[this.futureIndex] = this.movingItem
+      _items[this.movingIndex] = this.futureItem
+
+      this.items = _items
       this.from = this.items[oldIndex]
       this.to = this.items[newIndex]
     },
+    handleMove(e) {
+      const { index, futureIndex } = e.draggedContext
+      console.log(index, futureIndex, e.draggedContext)
+      this.movingIndex = index
+      this.futureIndex = futureIndex
+      return false
+    }
   }
 }
 </script>
 
 <style scoped>
+.ghost,
+.sortable-chosen {
+  color: #fff;
+  background-color: #3273dc;
+}
 .movable {
   cursor: move;
 }
