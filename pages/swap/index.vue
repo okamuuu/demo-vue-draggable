@@ -3,15 +3,15 @@
     <div class="container">
       <div class="columns">
         <div class="column">
-          <h1 class="title">Vue.Draggable Demo</h1>
+          <h1 class="title">Vue.Draggable <em>Swap</em> Demo</h1>
           <table class="table is-bordered" style="font-size:1.5em;">
             <thead>
               <tr>
                 <th>id</th><th>name</th><td>age</td>
               </tr>
             </thead>
-            <draggable v-model="items" tag="tbody" @end="handleDragEnd" :options="{animation:500}">
-              <tr class="movable" v-for="item in items" :key="item.id">
+            <draggable v-model="items" tag="tbody" :move="handleMove" @end="handleDragEnd" :options="{animation:500}">
+              <tr v-for="item in items" :key="item.id" :data-item-id="item.id">
                 <td>{{ item.id }}</td><td>{{ item.name }}</td><td>{{ item.age }}</td>
               </tr>
             </draggable>
@@ -52,8 +52,22 @@ export default {
   },
 
   methods: {
-    handleDragEnd(e) {
-      console.log(this.futureItem, this.movingItem)
+    handleDragEnd() {
+      this.$toast.show('dragEnd')
+
+      this.futureItem = this.items[this.futureIndex]
+      this.movingItem = this.items[this.movingIndex]
+      const _items = Object.assign([], this.items)
+      _items[this.futureIndex] = this.movingItem
+      _items[this.movingIndex] = this.futureItem
+
+      this.items = _items
+    },
+    handleMove(e) {
+      const { index, futureIndex } = e.draggedContext
+      this.movingIndex = index
+      this.futureIndex = futureIndex
+      return false
     }
   }
 }

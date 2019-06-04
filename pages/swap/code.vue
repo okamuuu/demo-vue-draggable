@@ -24,15 +24,27 @@ export default {
   computed: {
     orders() {
       return this.items.map(x => x.id)
-    },
+    }
   },
 
   methods: {
     handleDragEnd() {
       this.$toast.show('dragEnd')
-      // update database here
+
+      this.futureItem = this.items[this.futureIndex]
+      this.movingItem = this.items[this.movingIndex]
+      const _items = Object.assign([], this.items)
+      _items[this.futureIndex] = this.movingItem
+      _items[this.movingIndex] = this.futureItem
+
+      this.items = _items
+    },
+    handleMove(e) {
+      const { index, futureIndex } = e.draggedContext
+      this.movingIndex = index
+      this.futureIndex = futureIndex
+      return false // disable sort
     }
-  }
 }
       </code></pre>
     </div>
@@ -45,16 +57,14 @@ export default {
     const template = `
 <template>
   <table>
-    <draggable v-model="items" tag="tbody" @end="handleDragEnd">
-      <tr v-for="item in items" :key="item.id">
+    <draggable v-model="items" tag="tbody" :move="handleMove" @end="handleDragEnd" :options="{animation:500}">
+      <tr class="movable" v-for="item in items" :key="item.id">
         <td>{{ item.id }}</td><td>{{ item.name }}</td><td>{{ item.age }}</td>
       </tr>
     </draggable>
   </table>
 </template>
-
 `;
-    console.log(template)
     return { template }
   }
 }

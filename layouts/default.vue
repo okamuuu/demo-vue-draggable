@@ -2,8 +2,10 @@
   <div>
     <div class="tabs">
       <ul>
-        <li :class="{'is-active': $route.name === 'index' }"><nuxt-link to="/">Demo</nuxt-link></li>
-        <li :class="{'is-active': $route.name === 'code' }"><nuxt-link to="/code">Source Code</nuxt-link></li>
+        <li :class="{'is-active': $route.name === 'index' }"><nuxt-link to="/">Example 1</nuxt-link></li>
+        <li :class="{'is-active': $route.name === 'code' }"><nuxt-link to="/code">Code 1</nuxt-link></li>
+        <li :class="{'is-active': $route.name === 'swap' }"><nuxt-link to="/swap/">Example 2</nuxt-link></li>
+        <li :class="{'is-active': $route.name === 'swap-code' }"><nuxt-link to="/swap/code">Code 2</nuxt-link></li>
       </ul>
     </div>
     <nuxt />
