@@ -58,7 +58,7 @@ export default {
 <template>
   <table>
     <draggable v-model="items" tag="tbody" :move="handleMove" @end="handleDragEnd" :options="{animation:500}">
-      <tr class="movable" v-for="item in items" :key="item.id">
+      <tr v-for="item in items" :key="item.id">
         <td>{{ item.id }}</td><td>{{ item.name }}</td><td>{{ item.age }}</td>
       </tr>
     </draggable>
